@@ -1,0 +1,11 @@
+# Python 3.12.5
+
+# scipy >= 1.15.2
+numpy >= 2.1.2
+
+pandas >= 2.2.2
+
+seaborn >= 0.13.2
+matplotlib >= 3.9.2
+
+scikit-learn>= 1.6.1
