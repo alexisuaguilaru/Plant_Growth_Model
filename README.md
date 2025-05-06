@@ -23,5 +23,12 @@ The data set was taken [[1]](#references). It contains the measurements such as 
 ## Exploratory Data Analysis (EDA)
 The process related to data exploration is found in [Exploratory Data Analysis](./ExploratoryDataAnalysis/ExploratoryDataAnalysis.ipynb), where the procedures carried out to acquire different knowledge and insights about the dataset being worked with are presented. Where it is highlighted how the presence of fertilizers (organic or not) favors the significant growth of plants and that the other factors have complex interactions between them to generate their influence on plant growth. In addition, it was determined that the classes are not linearly separable, that is, that there is an overlap in the values taken by the factors, so that a plant may or may not have significant growth even with the same environmental or care factors.
 
+## Machine Learning Models
+The process related to the definition, training, evaluation and selection of Machine Learning models can be found in [Machine Learning Models](./Model/MachineLearningModel.ipynb), where the fundamental part about the metrics for determining when a model is better during the training stage as well as the metrics used for the evaluation and final selection of the model with the best expected behavior is broken down. It is highlighted that the models with the best behaviors in the test set have in common that they are linear models, or that they have linear decision edges, indicating that the generated features favored, in general, for the training of the models.
+<div style="text-align: center;">
+  <img src="./Resources/ResultsModelsTest.png" width=450>
+  <img src="./Resources/ResultsModelsTrain.png" width=450>
+</div>
+
 ## References
 * [1] Plant Growth Data Classification. Kaggle, [gortorozyannnn](https://www.kaggle.com/gorororororo23). https://www.kaggle.com/datasets/gorororororo23/plant-growth-data-classification
