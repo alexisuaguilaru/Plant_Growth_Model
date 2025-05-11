@@ -30,5 +30,8 @@ The process related to the definition, training, evaluation and selection of Mac
   <img src="./Resources/ResultsModelsTrain.png" width=450>
 </div>
 
+## Model Selection
+Based on the graphs shown in the section above and together with the final observations presented in [Machine Learning Models](./Model/MachineLearningModel.ipynb), it is concluded that the best model for this task is the one based on Logistic Regression, mainly due to the assumptions it makes to capture the simple (linear) relationships that are predominant in the dataset.
+
 ## References
 * [1] Plant Growth Data Classification. Kaggle, [gortorozyannnn](https://www.kaggle.com/gorororororo23). https://www.kaggle.com/datasets/gorororororo23/plant-growth-data-classification
