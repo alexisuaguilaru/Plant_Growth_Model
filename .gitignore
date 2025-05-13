@@ -1,2 +1,15 @@
 __pycache__
 __testing.ipynb
+__**
+
+**.aux
+**.bbl
+**.bcf
+**.blg
+**latexmk
+**.fls
+**.log
+**.out
+**.xml
+**.gz
+**.toc
