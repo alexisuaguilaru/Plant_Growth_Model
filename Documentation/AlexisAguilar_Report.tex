@@ -14,6 +14,8 @@
 
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{makecell}
+\usepackage{booktabs}
 
 \usepackage{setspace}
 \setstretch{1.5}
@@ -22,7 +24,7 @@
 \usepackage{csquotes}
 \usepackage{hyperref}
 \usepackage[style=ieee]{biblatex}
-\addbibresource{referencias.bib}
+\addbibresource{Referencias.bib}
 
 \begin{document}
     \begin{titlepage}
@@ -90,7 +92,68 @@
     \newpage
 
     \section{Descripción de los Datos}
-    {}
+    {
+        El conjunto de datos que se emplearán para el proyecto se encuentra disponibles 
+        en \cite{dataset_plants}, que es un conjunto de datos publicados en \href{https://www.kaggle.com/}{Kaggle} por 
+        la propia comunidad. Se cuenta con siete columnas, donde seis de ellas son 
+        atributos y la otra el target, referenciando a la fuente del conjunto de datos, 
+        se tienen los siguientes atributos junto con su descripción y tipo de dato: 
+
+        \begin{itemize}
+            \item \textbf{Soil\_Type       } [\emph{String}]: El tipo o composición del suelo 
+            en el que las plantas están creciendo o se plantan.
+            
+            \item \textbf{Sunlight\_Hours  } [\emph{Float}]: La duración o intensidad de la luz 
+            solar que las plantas reciben.
+            
+            \item \textbf{Water\_Frequency } [\emph{String}]: Qué tan seguido se riegan las 
+            plantas, se indica la frecuencia del riego.
+            
+            \item \textbf{Fertilizer\_Type } [\emph{String}]: El tipo de fertilizante usado 
+            para nutrir a las plantas.
+            
+            \item \textbf{Temperature      } [\emph{Float}]: Las condiciones de la temperatura 
+            ambiental bajo las cuales las plantas están creciendo.
+
+            \item \textbf{Humidity         } [\emph{Float}]: El nivel de humedad en el ambiente 
+            alrededor de las plantas.
+
+            \item \textbf{Growth\_Milestone} [\emph{Integer, Target}]: Descripción o marcadores 
+            que indican la etapa o eventos significativos en el proceso de crecimiento de 
+            las plantas.
+        \end{itemize}
+
+        Por último, el conjunto de datos consta de $193$ instancias (filas), las diferentes 
+        instancias lucen de la siguiente manera:
+
+        \begin{center}    
+            \begin{tabular}{lrll}
+                \toprule
+                Soil\_Type & Sunlight\_Hours & Water\_Frequency & Fertilizer\_Type \\
+                \midrule
+                sandy & 9.228 & daily     & none     \\
+                sandy & 9.774 & weekly    & chemical \\
+                clay  & 7.392 & bi-weekly & none     \\
+                clay  & 6.462 & bi-weekly & organic  \\
+                clay  & 8.846 & weekly    & organic  \\
+                loam  & 5.985 & bi-weekly & chemical \\
+                \bottomrule
+            \end{tabular}
+            \begin{tabular}{rrr}
+                \toprule
+                Temperature & Humidity & Growth\_Milestone \\
+                \midrule
+                33.804 & 32.815 & 0 \\
+                32.549 & 61.377 & 1 \\
+                31.100 & 68.600 & 0 \\
+                27.517 & 34.175 & 1 \\
+                27.700 & 56.800 & 1 \\
+                29.757 & 57.476 & 0 \\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+
+    }
     \newpage
 
     \section{Análisis Exploratorio de Datos}
