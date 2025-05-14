@@ -87,7 +87,9 @@
 
         Para lograr el último punto, se tiene como objetivo el crear un modelo de 
         aprendizaje supervisado para la clasificación del crecimiento significativo 
-        en base a los factores y mediciones relacionadas a su cuidado y ambiente.\\
+        en base a los factores y mediciones relacionadas a su cuidado y ambiente. 
+        Esto se encuentra desarrollado en el repositorio en GitHub dedicado para 
+        el proyecto: \href{https://github.com/alexisuaguilaru/Plant_Growth_Model}{Plant Growth Model}.\\
     }
     \newpage
 
@@ -157,7 +159,112 @@
     \newpage
 
     \section{Análisis Exploratorio de Datos}
-    {}
+    {
+        Los tipos de datos en base a la descripción proporcionada en \cite{dataset_plants} 
+        con la mostrada al momento de la lectura de los datos en Python, por lo que no 
+        es necesario realizar una transformación sobre los tipos de datos de cada atributo. \\
+        
+        Debido a que los valores que toma y representan el target, \emph{Growth\_Milestone}, 
+        son enteros, se tiene que el modelo que se generará será un clasificador binario; cuyas clases 
+        representan si hay un crecimiento significativo, bajo ciertos criterios, en las plantas. 
+        Como primera observación se tiene que el conjunto de datos está balanceado respecto 
+        a las clases, por lo que se podría usar cualquiera de las métricas bajo una 
+        justificación válida o apropiada al problema:
+
+        \begin{center}
+            \begin{tabular}{lr}
+            \toprule
+                Growth\_Milestone &  \\
+                Clases & Conteo \\
+            \midrule
+                0 [No Milestone] & 97 \\
+                1 [Milestone] & 96 \\
+            \bottomrule
+            \end{tabular}
+        \end{center}
+        
+        Se presenta un análisis univariado sobre los atributos numéricos y categóricos, y 
+        por último se prueban algunas hipótesis relevantes y relacionadas sobre las observaciones 
+        en los apartados anteriores.\\
+
+        \subsection{Atributos Numéricos}
+        {
+            Generando la descriptiva básica (medidas centrales y de dispersión) de 
+            los datos se obtienen los siguientes resultados:
+
+            \begin{center}
+                \begin{tabular}{lrrr}
+                \toprule
+                    Medida & Sunlight\_Hours & Temperature & Humidity \\
+                \midrule
+                    Media               & 6.8264 & 25.0760 & 58.0989 \\
+                    Desviación Estándar & 1.5995 &  5.3541 & 12.6317 \\
+                    Mínimo              & 4.0331 & 15.2000 & 30.5676 \\
+                    $Q_1$               & 5.4770 & 20.6370 & 49.3000 \\
+                    $Q_2$               & 6.8332 & 25.9123 & 59.1828 \\
+                    $Q_3$               & 8.2411 & 29.7579 & 69.1000 \\
+                    Máximo              & 9.9139 & 34.8101 & 79.6482 \\
+                \bottomrule
+                \end{tabular}
+            \end{center}
+
+            Primero se destaca que siguen diferentes rangos de valores, por lo que se 
+            tendrán que estandarizar o blanquear para su adecuado uso para el entrenamiento 
+            de los modelos que se crearán, además de permitir realizar comparativas entre 
+            las distribuciones. Al estandarizar los valores se tienen los siguientes resultados:
+
+            \begin{center}
+                \begin{tabular}{lrrr}
+                \toprule
+                Medida & Sunlight\_Hours & Temperature & Humidity \\
+                \midrule
+                Media               & 0 & 0 & 0 \\
+                Desviación Estándar & 1 & 1 & 1 \\
+                Mínimo              & -1.746 & -1.8445 & -2.1795 \\
+                $Q_1$               & -0.843 & -0.8290 & -0.6965 \\
+                $Q_2$               &  0.004 &  0.1561 &  0.0858 \\
+                $Q_3$               &  0.884 &  0.8744 &  0.8709 \\
+                Máximo              &  1.930 &  1.8180 &  1.7059 \\
+                \bottomrule
+                \end{tabular}
+            \end{center}
+
+            Destacándose que el atributo \emph{Sunlight\_Hours} figura que sigue una 
+            distribución debido a que su $Q_2$ se aproxima a $0$ junto que sus $Q_1$ 
+            y $Q_3$ se parecen, salvo el signo. Mientras que en \emph{Humidity} su $Q_2$ 
+            se encuentra equidistante a $Q_1$ y a $Q_3$, lo que significa que no tiene 
+            sesgo más no es simétrica. Y en \emph{Temperature}, por sus cuartiles, tiene 
+            un sesgo negativo considerable. En base a lo mencionado se tiene que los tres 
+            atributos siguen diferentes distribuciones, implicando que estos atributos surgen 
+            de diferentes fenómenos, interacciones y procesos que impactan en el crecimiento 
+            de las plantas, por lo que los tres atributos se vuelven relevantes para la 
+            clasificación debido a que cada uno condensa diferentes procesos para lograr un 
+            crecimiento significativo.\\
+
+            De los box plots, se puede observar que las distribuciones de los atributos 
+            no son tan diferentes según el target, según si hay un crecimiento significativo, 
+            esto al ver que las cajas están superpuestas, haciendo que no exista una diferencia 
+            Significativa entre las medias de las distribuciones. Lo que se destaca es que 
+            cuando existe un crecimiento significativo tiende a tomar valores más bajos y además 
+            de que su desviación estándar también tiende a decrecer.\\ 
+
+            Este último hecho se podría relacionar con que existe un control sobre los factores 
+            ambientales, haciendo que las distribuciones sean más restrictivas y reguladas, 
+            dejando afuera posibles fenómenos que generen un ambiente irregular para el 
+            crecimiento de las propias plantas. Haciendo que la planta esté en un ambiente ideal 
+            para su crecimiento pero, por las distribuciones, existe la posibilidad de que aunque 
+            esté en las condiciones idóneas no logre un crecimiento significativo.
+
+            \begin{center}
+                \includegraphics[width=0.85\textwidth]{./Resources/3_1.png}
+            \end{center}
+
+            De manera visual, no se cuenta con valores atípicos derivados de la Regla del 
+            Rango Intercuartil ni valores faltantes, por lo que estos atributos numéricos se 
+            encuentran preparados para la fase de entrenamiento.
+        }
+
+    }
     \newpage
 
     \section{Metodología del Proyecto}
