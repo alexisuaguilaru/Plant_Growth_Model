@@ -185,7 +185,7 @@
         
         Se presenta un análisis univariado sobre los atributos numéricos y categóricos, y 
         por último se prueban algunas hipótesis relevantes y relacionadas sobre las observaciones 
-        en los apartados anteriores.\\
+        en los apartados anteriores.
 
         \subsection{Atributos Numéricos}
         {
@@ -255,13 +255,85 @@
             para su crecimiento pero, por las distribuciones, existe la posibilidad de que aunque 
             esté en las condiciones idóneas no logre un crecimiento significativo.
 
-            \begin{center}
-                \includegraphics[width=0.85\textwidth]{./Resources/3_1.png}
-            \end{center}
+            \begin{figure}[hbtp]
+                \centering
+                \includegraphics[width=0.95\textwidth]{./Resources/3_1.png}
+                \caption{Distribución de los atributos Numéricos según el Crecimiento Significativo}
+                \label{fig:dist_num}
+            \end{figure}
 
             De manera visual, no se cuenta con valores atípicos derivados de la Regla del 
             Rango Intercuartil ni valores faltantes, por lo que estos atributos numéricos se 
             encuentran preparados para la fase de entrenamiento.
+        }
+
+        \subsection{Atributos Categóricos}
+        {
+            Cada atributo categórico tiene tres valores únicos, con las siguientes cantidades 
+            y valores:\\
+                
+            \begin{minipage}{0.5\textwidth}
+                \centering
+                \begin{tabular}{lr}
+                    \toprule
+                        \textbf{Soil\_Type} & \textbf{Cantidad} \\
+                    \midrule
+                        clay & 67 \\
+                        sandy & 64 \\
+                        loam & 62 \\
+                    \bottomrule
+                \end{tabular}
+            \end{minipage}%
+            \begin{minipage}{0.5\textwidth}
+                \centering
+                \begin{tabular}{lr}
+                    \toprule
+                        \textbf{Water\_Frequency} & \textbf{Cantidad} \\
+                    \midrule
+                        daily & 74 \\
+                        bi-weekly & 60 \\
+                        weekly & 59 \\
+                    \bottomrule
+                \end{tabular}
+            \end{minipage}%
+
+            \begin{minipage}{\textwidth}
+                \centering
+                \begin{tabular}{lr}
+                    \toprule
+                        \textbf{Fertilizer\_Type} & \textbf{Cantidad} \\
+                    \midrule
+                        none & 74 \\
+                        chemical & 65 \\
+                        organic & 54 \\
+                    \bottomrule
+                \end{tabular}
+            \end{minipage}\\
+
+            Siendo \emph{Soil\_type} el atributo que está más balanceado de los tres, por lo que 
+            el modelo tendrá suficientes instancias por cada valor como para distinguir entre los 
+            posibles casos donde este atributo sea crítico. Mientras que los otros atributos, \emph{Water\_Frequency} 
+            y \emph{Fertilizer\_Type} no están balanceadas en sus valores, esto podría estar 
+            relacionado a que no se realizaron los suficientes experimentos para generar todos los 
+            posibles resultados por igual o existe un factor que provocara un cierto sesgo o preferencia 
+            sobre ciertos valores, como lo son la falta de insumos suficientes.
+
+            \begin{figure}[hbtp]
+                \centering
+                \includegraphics[width=0.95\textwidth]{./Resources/3_2.png}
+                \caption{Distribución de los atributos Categóricos según el Crecimiento Significativo}
+                \label{fig:dist_num}
+            \end{figure}
+
+            Del gráfico, se puede destacar dos hechos. El atributo de \emph{Soil\_type} tiene un 
+            impacto significativo en el crecimiento de las plantas, debido a que los suelos de tipo 
+            franco (loam) afecta positivamente este fenómeno, mientras que un suelo de tipo arcilla 
+            (clay) tiene el efecto negativo, esto es un indicio de una posible interacción fuerte que 
+            repercute en el crecimiento significativo de una planta según el suelo en el que está plantada. 
+            Mientras que al atributo \emph{Fertilizer\_Type} muestra un también	un impacto en el 
+            crecimiento de las plantas, y este hecho es natural debido a que de aquí, la planta, obtiene 
+            los diferentes nutrientes para su adecuado crecimiento, siendo así el como favorece 
+            al crecimiento de una planta según el fertilizante que se use.
         }
 
     }
