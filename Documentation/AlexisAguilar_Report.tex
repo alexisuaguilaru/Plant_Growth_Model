@@ -276,7 +276,7 @@
                 \centering
                 \begin{tabular}{lr}
                     \toprule
-                        \textbf{Soil\_Type} & \textbf{Cantidad} \\
+                        {Soil\_Type} & {Cantidad} \\
                     \midrule
                         clay & 67 \\
                         sandy & 64 \\
@@ -288,7 +288,7 @@
                 \centering
                 \begin{tabular}{lr}
                     \toprule
-                        \textbf{Water\_Frequency} & \textbf{Cantidad} \\
+                        {Water\_Frequency} & {Cantidad} \\
                     \midrule
                         daily & 74 \\
                         bi-weekly & 60 \\
@@ -301,7 +301,7 @@
                 \centering
                 \begin{tabular}{lr}
                     \toprule
-                        \textbf{Fertilizer\_Type} & \textbf{Cantidad} \\
+                        {Fertilizer\_Type} & {Cantidad} \\
                     \midrule
                         none & 74 \\
                         chemical & 65 \\
@@ -339,7 +339,7 @@
     }
     \newpage
 
-    \section{Metodología del Proyecto}
+    \section{Metodología del Proyecto}\label{sec:meto}
     {
         \subsection{Preprocesamiento}
         {
@@ -380,6 +380,10 @@
             (\emph{Growth\_Milestone}), es decir, se conversan o se usan los atributos que 
             son menos independientes del target con el fin de que el modelo pueda capturar 
             y aprender estas relaciones.\\
+
+            Como parte del preprocesamiento, se incluye la separación del conjunto de datos original 
+            en conjuntos de entrenamiento y de prueba, se hace uso del $25\%$ de las instancias como 
+            instancias del conjunto de prueba.
         }
         
         \subsection{Modelos de Machine Learning}
@@ -478,7 +482,93 @@
     \newpage
 
     \section{Experimentos y Discusión de Resultados}
-    {}
+    {
+        \subsection{Optimización de Hiperparámetros}
+        {            
+            Para realizar el fine-tunning de los hiperparámetros en cada uno de los modelos 
+            propuestos en \ref{sec:meto} \nameref{sec:meto}, se hace uso Scikit Optimize, en 
+            específico de BayesSearchCV \cite{skopt_bayes} para determinar los mejores hiperparámetros 
+            por medio de métodos bayesianos (véase que funciona como Optuna \cite{optuna} pero 
+            sin usar métodos sofisticados como algoritmos genéticos).
+        }
+
+        \subsection{Descripción de Experimentos}
+        {
+            Para el fine-tunning de hiperparámetros se hizo uso de la métrica \emph{accuracy}, debido 
+            a que como las instancias del conjunto de datos se encuentran balanceadas \ref{sec:eda} \nameref{sec:eda} 
+            y, bajo este escenario de balance, la métrica \emph{accuracy} se comporta como \emph{f1}, 
+            y así permitiendo reducir el impacto de los falsos positivos (FP) y falsos negativos (FN) en 
+            las predicciones, que esto se vuelve equivalentemente a reducir la sobrestimación y 
+            subestimación, respectivamente, del crecimiento Significativo que una planta alcanza. 
+            Y como BayesSearchCV \cite{skopt_bayes} se apoya en cross-validation, también se tiene 
+            que definir la cantidad de pliegues o folds para realizar la validación de los hiperparámetros 
+            candidatos a ser los mejores para un modelo, por ello se hace uso de $6$ pliegues debido a 
+            que deja suficientes instancias para validar los hiperparámetros como de entrenamiento.   
+        }
+
+        \subsection{Evaluación de Resultados}
+        {
+            En base a los mejores modelos (hiperparámetros) encontrados por medio BayesSearchCV \cite{skopt_bayes}, 
+            se evalúan tanto en el conjunto de entrenamiento como de prueba, se obtienen los siguientes 
+            resultados tanto tabulados como gráficados:
+            
+            \begin{center}
+                \begin{tabular}{lrrrrr}
+                    \toprule
+                        & SVM & Forest & AdaBoost & Logistic & KNN \\
+                    \midrule
+                        Accuracy & 0.638889 & 0.708333 & 0.694444 & 0.652778 & 1.000000 \\
+                        Precision & 0.619565 & 0.666667 & 0.659574 & 0.657895 & 1.000000 \\
+                        Recall & 0.770270 & 0.864865 & 0.837838 & 0.675676 & 1.000000 \\
+                        F1 & 0.686747 & 0.752941 & 0.738095 & 0.666667 & 1.000000 \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+            \begin{figure}[hbtp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{./Resources/5_1.png}
+                \caption{Puntajes de diferentes métricas de los Mejores Modelos en el Conjunto de Entrenamiento}
+                \label{fig:res_train}
+            \end{figure}
+
+            \begin{figure}[hbtp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{./Resources/5_2.png}
+                \caption{Puntajes de diferentes métricas de los Mejores Modelos en el Conjunto de Prueba}
+                \label{fig:res_test}
+            \end{figure}
+            \begin{center}
+                \begin{tabular}{lrrrrr}
+                    \toprule
+                        & SVM & Forest & AdaBoost & Logistic & KNN \\
+                    \midrule
+                        Accuracy & 0.693878 & 0.612245 & 0.673469 & 0.714286 & 0.571429 \\
+                        Precision & 0.629630 & 0.548387 & 0.615385 & 0.681818 & 0.516129 \\
+                        Recall & 0.772727 & 0.772727 & 0.727273 & 0.681818 & 0.727273 \\
+                        F1 & 0.693878 & 0.641509 & 0.666667 & 0.681818 & 0.603774 \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+
+            Haciendo de las principales métricas empleadas en clasificación se puede observar el 
+            como se comportan los modelos en ambos conjuntos. Destacando como en Random Forest, 
+            AdaBoost y KNN alcanzan puntajes más bajos en el conjunto de prueba que en el conjunto 
+            de entrenamiento, destacando como KNN se encuentra sobreajustado de manera extrema. \\ 
+
+            En cambio, en los modelos como SVM y Logistic Regression, tienen un mejor comportamiento 
+            en el conjunto de prueba, haciendo que estos modelos sean lo más adecuados para el problema 
+            presente. Debido a que ambos modelos emplean la separabilidad de clases como principio de 
+            su funcionamiento, por lo que se tiene que los atributos generados en la etapa de preprocesamiento 
+            fueron fructíferos para que el modelo sea capaz de aprender los patrones para poder distinguir 
+            entre ambas clases del target.\\
+
+            Para el caso de SVM, tiene un kernel polinómico de grado $1$ como sus mejores hiperparámetros; 
+            y para el caso de Logistic Regression, su tipo de penalización es $l1$ es su mejor hiperparámetro. 
+            Estas configuraciones muestran un indicio fuerte de que las clases son linealmente separables y, 
+            de aquí, estos modelos obtengan los mejores resultados y que puedan ser robustos para la predicción 
+            en nuevas instancias.
+        }
+    }
     \newpage
 
     \section{Análisis de los Resultados}
