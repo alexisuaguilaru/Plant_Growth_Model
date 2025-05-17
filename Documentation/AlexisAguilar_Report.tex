@@ -60,13 +60,13 @@
         {\large\textbf{Licenciatura en Tecnologías para la Información en Ciencias}}
         \vspace{2cm}
 
-        \flushleft
+        \flushleft{
         {\textbf{Número de Cuenta:\ }424060075}\\
-        {\textbf{Asignatura:\ }Sistemas basados en conocimiento [Machine Learning]}
+        {\textbf{Asignatura:\ }Sistemas basados en conocimiento [Machine Learning]}}
         \vspace{2cm}
 
-        \flushright
-        {\textbf{A:\ }\underline{27 de Mayo del 2025}}
+        \flushright{
+        {\textbf{A:\ }\underline{27 de Mayo del 2025}}}
         \vfill
 
     \end{titlepage}
@@ -158,7 +158,7 @@
     }
     \newpage
 
-    \section{Análisis Exploratorio de Datos}
+    \section{Análisis Exploratorio de Datos}\label{sec:eda}
     {
         Los tipos de datos en base a la descripción proporcionada en \cite{dataset_plants} 
         con la mostrada al momento de la lectura de los datos en Python, por lo que no 
@@ -322,7 +322,7 @@
                 \centering
                 \includegraphics[width=0.95\textwidth]{./Resources/3_2.png}
                 \caption{Distribución de los atributos Categóricos según el Crecimiento Significativo}
-                \label{fig:dist_num}
+                \label{fig:dist_cat}
             \end{figure}
 
             Del gráfico, se puede destacar dos hechos. El atributo de \emph{Soil\_type} tiene un 
@@ -340,7 +340,89 @@
     \newpage
 
     \section{Metodología del Proyecto}
-    {}
+    {
+        \subsection{Preprocesamiento}
+        {
+            Del análisis realizado en la sección previa, en \ref{sec:eda} \nameref{sec:eda}, se 
+            puede determinar que es necesario aplicar un adecuado preprocesamiento 
+            de los atributos, así cómo también derivar otros que puedan crear otras 
+            posibles interacciones. Por lo que se propone realizar lo siguiente:
+
+            \begin{itemize}
+                \item \textbf{Atributos Numéricos}: Los atributos que se generan los 
+                que se obtienen después de aplicar las funciones $\sqrt{x}$, $\log_{10}{x}$, 
+                $1/x$, $x^2$ y $x$ (denotando la función identidad), donde $x$ son los posibles 
+                valores que pueden tomar los atributos numéricos. Después de generar los valores, 
+                se la aplica la transformación de estandarización en cada uno de los atributos 
+                derivados, esto se hace para que los valores estén en un rango de entre $-3$ y $3$ 
+                o, equivalentemente, estén en unidades estándar.
+                \item \textbf{Atributos Categóricos}: Debido a que los atributos pueden tomar 
+                tres valores que no tienen una relación de orden plausible o clara, se tiene que 
+                realizar una codificación haciendo uso de la codificación One-Hot, para obtener 
+                una información más granular sobre las diferentes instancias. Después de esta 
+                codificación no se le aplica ninguna otra transformación.
+            \end{itemize}
+
+            Debido a que el espacio de atributos creció a una dimensión relativamente grande, se 
+            tiene que como parte del preprocesamiento se realiza una selección de atributos con 
+            el fin de reducir el problema de la dimensionalidad y hacer que los modelos tengan un 
+            mejor aprendizaje (capturen las relaciones importantes) mientras se reduce el coste 
+            computacional tanto de entrenamiento como de predicción. Para ello: 
+
+            \begin{itemize}
+                \item \textbf{Atributos Numéricos}: Se selecciona los mejores $10$ atributos por 
+                medio de Mutual Information (MI) \cite{sklearn_mutual_info}.
+                \item \textbf{Atributos Categóricos}: Se seleccionan los mejores $6$ atributos por 
+                medio del Estadístico $\chi^2$ \cite{sklearn_chi2}.
+            \end{itemize}
+
+            Ambas métricas permiten medir la misma noción de independencia respecto al target 
+            (\emph{Growth\_Milestone}), es decir, se conversan o se usan los atributos que 
+            son menos independientes del target con el fin de que el modelo pueda capturar 
+            y aprender estas relaciones.\\
+        }
+        
+        \subsection{Modelos de Machine Learning}
+        {
+            Para realizar la tarea de clasificación del crecimiento de las plantas se hace uso, 
+            principalmente, de modelos que permiten generar o propiciar bordes de decisión no 
+            lineales, debido a que, por como se puede observar en \ref{sec:eda} \nameref{sec:eda}, 
+            las clases del target no son linealmente separables, haciendo que los modelos que hacen 
+            uso de bordes de decisión naive o lineales no puedan capturar adecuadamente los patrones 
+            en los datos para clasificar una instancia de manera adecuada. Por ello, se hace uso de 
+            los siguientes modelos e hiperparámetros a ajustar:\\
+
+            \textbf{Support Vector Machine (SVM)}\\
+            {
+                Se usa SVM debido a que es el modelo por ser el principal referente de los modelos 
+                que generan bordes de decisión no lineales. De los hiperparámetros que se pueden ajustar 
+                según \cite{sklearn_svc}, se escogen los siguientes:
+                \begin{itemize}
+                    \item \emph{kernel}: 
+                \end{itemize}
+            }
+
+            \textbf{Random Forest}\\
+            {
+                
+            }
+
+            \textbf{AdaBoost}\\
+            {
+                
+            }
+
+            \textbf{Logistic Regression}\\
+            {
+                
+            }
+
+            \textbf{K-Nearest Neighbors (KNN)}\\
+            {
+                
+            }
+        }
+    }
     \newpage
 
     \section{Experimentos y Discusión de Resultados}
