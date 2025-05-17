@@ -394,32 +394,84 @@
 
             \textbf{Support Vector Machine (SVM)}\\
             {
-                Se usa SVM debido a que es el modelo por ser el principal referente de los modelos 
-                que generan bordes de decisión no lineales. De los hiperparámetros que se pueden ajustar 
-                según \cite{sklearn_svc}, se escogen los siguientes:
+                El usar SVM permite añadir un capa adicional de interacción entre atributos debido a 
+                que hace uso del truco del kernel que esto permite propiciar un mejor ambiente para 
+                la separabilidad entre clases. Esto último hace que SVM sea un modelo predilecto para 
+                tratar problemas de clasificación con clases sin separabilidad lineal, como lo es en 
+                este caso. De los hiperparámetros que se encuentra en \cite{sklearn_svc}, se ajustan 
+                los siguientes:
                 \begin{itemize}
-                    \item \emph{kernel}: 
+                    \item \emph{kernel}: Se escoge entre Poly (polinómico), RBF (Radial Basis 
+                    Function) y Sigmoid.
+                    \item \emph{C}: Parámetro de regularización. Se escogen valores reales en $[1e-10,5]$
+                    \item \emph{gamma}: Coeficiente del kernel. Se escogen valores reales en $[0,2]$
+                    \item \emph{degree}: Grado del polinomio. Ajustado únicamente en el kernel poly. Se escogen valores enteros en $[1,4]$ 
+                    \item \emph{coef0}: Valor del coeficiente $x^0$. Ajustado únicamente en el kernel poly. Se escogen valores reales en $[0,2]$
                 \end{itemize}
             }
 
             \textbf{Random Forest}\\
             {
-                
+                El usar Random Forest permite aprovechar de mejor manera las decisiones tomadas 
+                por árboles de decisión simples, de profundidades bajas, gracias a que cuando 
+                se combinan sus decisiones se reduce el sesgo y, por su entrenamiento, también 
+                se reduce su varianza. Además de ello, al combinar varios árboles simples permite 
+                el crear bordes de decisión más complejas, no lineales, beneficiándose así la 
+                separabilidad entre clases. De los hiperparámetros que se encuentran en \cite{sklearn_forest}, 
+                se ajustan los siguientes:
+                \begin{itemize}
+                    \item \emph{n\_estimators}: Cantidad de estimadores. Se escogen valores enteros en $[1,100]$ 
+                    \item \emph{criterion}: Función para decidir que nodo aplicar el split. Se escoge entre gini y entropy
+                    \item \emph{max\_depth}: Altura de máxima de los árboles de decisión. Se escogen valores enteros pequeños en $[1,3]$
+                    \item \emph{min\_samples\_split}: Mínimo número de instancias en un nodo para aplicar la operación de split. Se escogen valores reales en $[1e-2,0.5]$
+                \end{itemize}
             }
 
             \textbf{AdaBoost}\\
             {
-                
+                El usar árboles de decisión entrenados de forma secuencial para corregir los 
+                errores generados por modelos previos mientras se mejora el poder predictivo, 
+                permite generar bordes de decisión no lineales y más finos, es decir, que se 
+                adecuen para generar una mayor separabilidad entre clases sin que se caiga en 
+                un problema de varianza (esto justamente lo permite el ratio de aprendizaje). 
+                De los hiperparámetros que se encuentran en \cite{sklearn_adaboost}, se ajustan 
+                los siguientes:
+                \begin{itemize}
+                    \item \emph{estimator}: Estimador débil. Se hace uso de árboles de decisión con los parámetros defaults de \cite{sklearn_tree} y salvo \emph{max\_depth} que se escoge valores enteros en $[1,4]$
+                    \item \emph{n\_estimators}: Cantidad de estimadores. Se escogen valores enteros en $[1,100]$ 
+                    \item \emph{learning\_rate}: Peso que se aplica a cada modelo de manera secuencial. Se escogen valores reales en $[1e-3,2]$
+                \end{itemize}
             }
 
             \textbf{Logistic Regression}\\
             {
-                
+                El decidir la clase de una instancia por medio de un borde decisión lineal podría 
+                favorece en la comparativa contra modelos que generan bordes de decisión más complejos, 
+                además de se explorar otra forma de generar interacciones por medio de combinaciones 
+                lineales de atributos. Esto último permite que este modelo sea ampliamente usado 
+                en problemas donde las clases están linealmente separadas. De los hiperparámetros 
+                que se encuentran en \cite{sklearn_logistic}, se ajustan los siguientes:
+                \begin{itemize}
+                    \item \emph{C}: Parámetro de regularización. Se escogen valores reales en $[1e-10,5]$
+                    \item \emph{penalty}: Tipo de penalización que se aplica a los parámetros. Se escoge entre $l1$ y $l2$
+                    \item \emph{solver}: Algoritmo usado para optimizar los parámetros. Se escoge entre liblinear y saga (que admiten ambas penalizaciones)
+                \end{itemize}
             }
 
             \textbf{K-Nearest Neighbors (KNN)}\\
             {
-                
+                El usar la distancia o similitud entre instancias permite determinar bordes de decisión	 
+                no lineales entre las clases, debido a que usa operaciones no lineales para medir esta 
+                noción de cercanía entre los diferentes puntos, permitiendo así la generación de la 
+                separación entre clases. Esto último hace a KNN un modelo para modelar la predicción 
+                de forma sencilla y con bajo coste computacional. De los hiperparámetros en \cite{sklearn_knn}, 
+                se ajustan los siguientes:
+                \begin{itemize}
+                    \item \emph{n\_neighbors}: Cantidad de vecinos cercanos que se consideran. Se escogen valores enteros en $[3,50]$
+                    \item \emph{weights}: La función de peso que se le aplica a cada vecino, importancia que tiene. Se escoge entre uniform y distance
+                    \item \emph{p}: Potencia de métrica de Minkowski (por default, y solo se ajusta para esta métrica). Se escogen valores enteros en $[1,3]$
+                    \item \emph{metric}: Métrica que se usa para medir distancia y similitud. Se escoge entre cosine y correlation
+                \end{itemize}
             }
         }
     }
