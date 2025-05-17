@@ -26,8 +26,8 @@ The process related to data exploration is found in [Exploratory Data Analysis](
 ## Machine Learning Models
 The process related to the definition, training, evaluation and selection of Machine Learning models can be found in [Machine Learning Models](./Model/MachineLearningModel.ipynb), where the fundamental part about the metrics for determining when a model is better during the training stage as well as the metrics used for the evaluation and final selection of the model with the best expected behavior is broken down. It is highlighted that the models with the best behaviors in the test set have in common that they are linear models, or that they have linear decision edges, indicating that the generated features favored, in general, for the training of the models.
 <div style="text-align: center;">
-  <img src="./Resources/ResultsModelsTest.png" width=450>
-  <img src="./Resources/ResultsModelsTrain.png" width=450>
+  <img src="./Documentation/Resources/5_2.png" width=450>
+  <img src="./Documentation/Resources/5_1.png" width=450>
 </div>
 
 ## Model Selection
