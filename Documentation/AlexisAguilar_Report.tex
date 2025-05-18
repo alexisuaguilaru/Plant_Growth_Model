@@ -481,7 +481,7 @@
     }
     \newpage
 
-    \section{Experimentos y Discusión de Resultados}
+    \section{Experimentos y Discusión de Resultados}\label{sec:exp}
     {
         \subsection{Optimización de Hiperparámetros}
         {            
@@ -571,8 +571,42 @@
     }
     \newpage
 
-    \section{Análisis de los Resultados}
-    {}
+    \section{Análisis de Resultados}
+    {
+        En el marco de la agricultura industrial, una de las metas es alcanzar 
+        la máxima producción y calidad (esto lleva consigo mayores ganancias), 
+        por ello mientras más temprano se determinen las plantas que crecerán 
+        de manera significativa va a permitir el focalizar los recursos en esas 
+        plantas y, además, tomar medidas en las plantas que no tendrán un 
+        crecimiento notorio. Por ello, se vuelve importante el construir modelos 
+        que clasifiquen las plantas de manera adecuada bajo esta criteria, es decir, 
+        incrementar los esfuerzos para que las plantas lleguen a tener un crecimiento 
+        significativo o, equivalentemente, las condiciones para que logren esto.\\
+
+        Lo anterior discutido se transforma, usando la jerga de Ciencia de Datos, reducir 
+        los falsos positivos, es decir, indicar que una planta tendrá un crecimiento 
+        notorio cuando en realidad no lo tendrá, esto último se puede ver como invertir 
+        más tiempo y recursos en una planta que no propiciará un beneficio mayor que 
+        las pérdidas generadas para su cuidado. De aquí se le tenga que dar más preferencia 
+        a los modelos con un puntaje más alto en \emph{precision}, debido a que cuidan 
+        el hecho de ``no mentir'' sobre el crecimiento de una planta, y esto se alinea con 
+        el objetivo de maximizar la producción y calidad en las plantas.\\ 
+
+        De la sección anterior, \ref{sec:exp} \nameref{sec:exp}, se puede determinar 
+        que el mejor modelo para la tarea y el que mejor se ajusta es Logistic Regression, 
+        esto lleva una implicación fuerte, y que está asociada a su definición, es que 
+        los factores ambientales y de cuidado están en interacciones lineales simples, 
+        por lo que se podría encontrar las combinaciones ideales para alcanzar la máxima 
+        producción y calidad de forma sencilla y sin tanto coste computacional.\\
+
+        Lo que pasa en los demás modelos, salvo con SVM, es que construyen relaciones 
+        complejas entre los factores que impactan en el crecimiento de una planta, estas 
+        relaciones se desvían mucho cuando se usan en otros casos, plantas, que no 
+        pertenezcan a las usadas para el entrenamiento de los modelos, es decir, ver que 
+        un patrón muy especifico y complejo se verifica en un conjunto de ejemplos como 
+        que no siempre se sostiene en otros conjuntos de ejemplos, haciendo que les vaya 
+        de peor manera al momento de determinar cuando una planta va a crecer notoriamente.
+    }
     \newpage
 
     \section{Conclusiones}
