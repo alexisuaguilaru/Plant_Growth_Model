@@ -571,7 +571,7 @@
     }
     \newpage
 
-    \section{Análisis de Resultados}
+    \section{Análisis de Resultados}\label{sec:analisis}
     {
         En el marco de la agricultura industrial, una de las metas es alcanzar 
         la máxima producción y calidad (esto lleva consigo mayores ganancias), 
@@ -605,12 +605,51 @@
         pertenezcan a las usadas para el entrenamiento de los modelos, es decir, ver que 
         un patrón muy especifico y complejo se verifica en un conjunto de ejemplos como 
         que no siempre se sostiene en otros conjuntos de ejemplos, haciendo que les vaya 
-        de peor manera al momento de determinar cuando una planta va a crecer notoriamente.
+        de peor manera al momento de determinar cuando una planta va a crecer notoriamente.\\
+
+        Si se consideran los puntajes obtenidos en las diferentes métricas, se puede observar 
+        que toman valores bajos, esto significa un hecho comentado en \ref{sec:eda} \nameref{sec:eda}, 
+        y es que aunque las plantas tengan las condiciones óptimas teóricas para tener un 
+        crecimiento Significativo no implica que lo alcancen. Es decir, por factores externos 
+        y no considerados para este proyecto, puede que se encuentren algunos que tengan un 
+        mayor peso para determinar el crecimiento de una planta, haciendo que solo ciertas 
+        plantas, de las que están en las condiciones óptimas, crezcan de manera Significativa. Y, 
+        de forma equivalente, que ciertas plantas en condiciones desfavorables lleguen a tener 
+        un crecimiento significativo de manera anormal o difícil de explicar usando estos 
+        modelos. 
     }
     \newpage
 
     \section{Conclusiones}
-    {}
+    {
+        Que Logistic Regression haya tenido un mejor desempeño junto con SVM que hace 
+        uso del kernel lineal (polinómico con grado $1$) implica que los atributos numéricos 
+        generados por medio de las funciones matemáticas en \ref{sec:meto} \nameref{sec:meto} 
+        propiciaron interacciones lineales entre atributos que permitieron que los modelos 
+        que aprovechan de éstas sean beneficiados totalmente. Esto genera un contraste con 
+        modelos que buscan relaciones más complejas o no lineales, es decir, patrones más 
+        elaborados en los datos de entrenamiento; esta situación es lo que paso en los demás 
+        modelos, se estaban sobreajustando a los patrones que los datos tenían mas no a 
+        las relaciones importantes.\\
+
+        Lo anterior se resume en primero generar atributos por medio de aplicarles funciones 
+        simples para después definir modelos que asuman que los atributos están en relaciones 
+        lineales haciendo que estos modelos lleguen a tener puntajes más altos contra modelos 
+        que usan relaciones más complejas entre atributos. Por ello, se vuelve fundamental 
+        el explorar los datos en búsqueda de patrones lineales que surjan después de aplicarles 
+        alguna operación matemática.\\
+
+        De \ref{sec:analisis} \nameref{sec:analisis}, se tiene que el rendimiento de los modelos, 
+        que puede verse como bajo, tal vez sean el más alto debido al hecho de que a tratarse de 
+        agentes vivos (plantas) nunca se podrá considerar todos los factores que puedan impactar o 
+        influenciar en el crecimiento de los mismos, por ello se tiene casos que aunque las condiciones 
+        de las plantas estén en regiones del espacio de atributos en donde se alcanza un crecimiento 
+        significativo no tengan este crecimiento, debido a factores o medidas que no se estén considerado 
+        o incluso por eventos azarosos. Por ello, generalizado, nunca se logra construir un modelo 
+        perfecto, un clasificador ideal, debido a los efectos de la aleatoriedad en las instancias 
+        de entrenamiento o porque los atributos representativos de los diferentes grupos estén 
+        solapándose sobre el espacio de atributos.
+    }
     \newpage
 
     \printbibliography[heading=bibintoc,title={Referencias Bibliográficas}]
