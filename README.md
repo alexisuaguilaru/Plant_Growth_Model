@@ -33,5 +33,10 @@ The process related to the definition, training, evaluation and selection of Mac
 ## Model Selection
 Based on the graphs shown in the section above and together with the final observations presented in [Machine Learning Models](./Model/MachineLearningModel.ipynb), it is concluded that the best model for this task is the one based on Logistic Regression, mainly due to the assumptions it makes to capture the simple (linear) relationships that are predominant in the dataset.
 
+## Conclusions
+When considering the context of the problem together with the results obtained, and specifically that the best scores are associated with linear models, it is possible to find a theoretical configuration of the factors considered where significant plant growth is achieved in most cases. This process can be assumed not to have a high computational cost, because the interactions between the attributes, including the derived and generated ones, are linear or simple to be captured by any of the models.
+
+This has the implication of having benefits to the agriculture industry because plants can be made to reach their maximum growth, their maximum production, with an ideal configuration of the factors involved. Specifically, more sophisticated models that do not require so much computational complexity could be generated to generate more refined predictions about the growth of a plant and adapt them to a more specific type of plant.
+
 ## References
-* [1] Plant Growth Data Classification. Kaggle, [gortorozyannnn](https://www.kaggle.com/gorororororo23). https://www.kaggle.com/datasets/gorororororo23/plant-growth-data-classification
+* [1] Plant Growth Data Classification. Kaggle, Gor Torozyan. https://www.kaggle.com/datasets/gorororororo23/plant-growth-data-classification/data
